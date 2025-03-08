@@ -12,7 +12,19 @@ load_dotenv(override=True)
 
 
 class Chat:
-    AI_SERVER_URL = os.getenv("AI_SERVER_URL")
+    OPEN_AI_BASE_URL = (
+        None
+        if (
+            os.getenv("OPEN_AI_BASE_URL") is None or os.getenv("OPEN_AI_BASE_URL") == ""
+        )
+        else os.getenv("OPEN_AI_BASE_URL")
+    )
+    OPEN_AI_API_KEY = (
+        "."
+        if (os.getenv("OPEN_AI_API_KEY") is None or os.getenv("OPEN_AI_API_KEY") == "")
+        else os.getenv("OPEN_AI_API_KEY")
+    )
+    OPEN_AI_EMBED_DIMENSION = os.getenv("OPEN_AI_EMBED_DIMENSION")
     VECTOR_DB_URL = os.getenv("VECTOR_DB_URL")
     prompt_template = ChatPromptTemplate.from_messages(
         messages=[
@@ -40,19 +52,24 @@ class Chat:
     @staticmethod
     def get_chat_history_path():
         pwd = os.path.join(os.path.dirname(os.path.abspath(__file__)))
-        chat_history_path = os.path.join(pwd, "chat-history.json")
+        chat_history_path = os.path.join(pwd, "chat.history.json")
         return chat_history_path
 
     def __init__(self):
+        llm_config = {
+            "api_key": Chat.OPEN_AI_API_KEY,
+        }
+        if Chat.OPEN_AI_BASE_URL is not None:
+            llm_config["base_url"] = Chat.OPEN_AI_BASE_URL
+
+        print(llm_config)
         self.llm = ChatOpenAI(
-            base_url=Chat.AI_SERVER_URL,
-            api_key=".",
+            **llm_config,
         )
 
         self.embedding = OpenAIEmbeddings(
-            base_url=Chat.AI_SERVER_URL,
             check_embedding_ctx_length=False,  # Important
-            api_key=".",
+            **llm_config,
         )
 
         self.vector_db = QdrantClient(url=Chat.VECTOR_DB_URL)
