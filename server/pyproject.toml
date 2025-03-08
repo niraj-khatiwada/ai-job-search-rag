@@ -5,6 +5,7 @@ description = "AI apps using LangChain"
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
+    "fastapi[standard]>=0.115.11",
     "jq>=1.8.0",
     "langchain>=0.1.20",
     "langchain-community>=0.0.38",
