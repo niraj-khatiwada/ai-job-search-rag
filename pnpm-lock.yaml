@@ -62,6 +62,9 @@ importers:
       '@heroui/use-theme':
         specifier: ^2.1.2
         version: 2.1.2(react@18.3.1)
+      '@tanstack/react-query':
+        specifier: ^5.67.2
+        version: 5.67.2(react@18.3.1)
       '@tanstack/react-router':
         specifier: 1.112.18
         version: 1.112.18(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -2841,6 +2844,14 @@ packages:
   '@tanstack/history@1.112.18':
     resolution: {integrity: sha512-57QWQ0DWkhJGwUxFqzHD51tfCZmU5Bnl7KY7x3yaKvk/+uU7i0Pz7d4HFTFMl+pxq/Q/zmV8TyQSctM5MIZWvw==}
     engines: {node: '>=12'}
+
+  '@tanstack/query-core@5.67.2':
+    resolution: {integrity: sha512-+iaFJ/pt8TaApCk6LuZ0WHS/ECVfTzrxDOEL9HH9Dayyb5OVuomLzDXeSaI2GlGT/8HN7bDGiRXDts3LV+u6ww==}
+
+  '@tanstack/react-query@5.67.2':
+    resolution: {integrity: sha512-6Sa+BVNJWhAV4QHvIqM73norNeGRWGC3ftN0Ix87cmMvI215I1wyJ44KUTt/9a0V9YimfGcg25AITaYVel71Og==}
+    peerDependencies:
+      react: ^18 || ^19
 
   '@tanstack/react-router@1.112.18':
     resolution: {integrity: sha512-eOoCD1DDWOxHaG1kTaY6dJ5EfpKO8JZKWQ+o6txvAmQhe/qk9eKkb26D0YXcOgOmnltjRXPN/7JRwK4mpJPQzw==}
@@ -8660,6 +8671,13 @@ snapshots:
       tslib: 2.6.2
 
   '@tanstack/history@1.112.18': {}
+
+  '@tanstack/query-core@5.67.2': {}
+
+  '@tanstack/react-query@5.67.2(react@18.3.1)':
+    dependencies:
+      '@tanstack/query-core': 5.67.2
+      react: 18.3.1
 
   '@tanstack/react-router@1.112.18(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:

@@ -4,6 +4,7 @@ import * as React from 'react'
 
 import Navbar from '~/components/Navbar'
 import { Toaster } from '~/components/Toast'
+import QueryClientProvider from '~/providers/QueryClientProvider'
 import UIProvider from '../providers/UIProvider'
 
 export const Route = createRootRoute({
@@ -15,10 +16,12 @@ const isDev = import.meta.env.DEV
 function RootComponent() {
   return (
     <>
-      <UIProvider>
-        <Navbar />
-        <Outlet />
-      </UIProvider>
+      <QueryClientProvider>
+        <UIProvider>
+          <Navbar />
+          <Outlet />
+        </UIProvider>
+      </QueryClientProvider>
       <Toaster />
       {isDev ? <TanStackRouterDevtools position="bottom-right" /> : null}
     </>
