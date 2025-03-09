@@ -1,4 +1,5 @@
 import { type ButtonProps as NextButtonProps, PressEvent } from '@heroui/react'
+import { AnimatePresence, motion } from 'framer-motion'
 import React, { LegacyRef, useEffect, useRef, useState } from 'react'
 import Button, { ButtonProps } from '.'
 
@@ -62,7 +63,19 @@ const ButtonWithConfirmation = React.forwardRef(
           ref={ref as LegacyRef<HTMLButtonElement>}
           onPress={handlePress}
         >
-          {children?.({ isConfirming, resetConfirmation })}
+          <AnimatePresence initial={false}>
+            <motion.div
+              className="flex items-center"
+              layout="preserve-aspect"
+              transition={{
+                type: 'spring',
+                visualDuration: 0.2,
+                bounce: 0.15,
+              }}
+            >
+              {children?.({ isConfirming, resetConfirmation })}
+            </motion.div>
+          </AnimatePresence>
         </Button>
       </div>
     )
