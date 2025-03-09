@@ -1,14 +1,16 @@
 import os
 from langchain_openai import OpenAIEmbeddings, ChatOpenAI
 from dotenv import load_dotenv
-from qdrant_client import QdrantClient
 from langchain.prompts.chat import ChatPromptTemplate, MessagesPlaceholder
 from langchain_community.chat_message_histories.file import FileChatMessageHistory
 from langchain.globals import set_debug
+from vector_db import VectorDB
 
 set_debug(True)
 
-load_dotenv(override=True)
+load_dotenv(
+    override=True,
+)
 
 
 class Chat:
@@ -25,7 +27,6 @@ class Chat:
         else os.getenv("OPEN_AI_API_KEY")
     )
     OPEN_AI_EMBED_DIMENSION = os.getenv("OPEN_AI_EMBED_DIMENSION")
-    VECTOR_DB_URL = os.getenv("VECTOR_DB_URL")
     prompt_template = ChatPromptTemplate.from_messages(
         messages=[
             (
@@ -62,7 +63,6 @@ class Chat:
         if Chat.OPEN_AI_BASE_URL is not None:
             llm_config["base_url"] = Chat.OPEN_AI_BASE_URL
 
-        print(llm_config)
         self.llm = ChatOpenAI(
             **llm_config,
         )
@@ -72,7 +72,7 @@ class Chat:
             **llm_config,
         )
 
-        self.vector_db = QdrantClient(url=Chat.VECTOR_DB_URL)
+        self.vector_db = VectorDB().client
 
     def invoke(self, question: str):
         chat_history = FileChatMessageHistory(file_path=Chat.get_chat_history_path())
@@ -81,9 +81,11 @@ class Chat:
             query=self.embedding.embed_query(question),
         ).points
 
+        print(hits)
+
         matches = []
         for hit in hits:
-            matches.append(hit.payload["page_content"])
+            matches.append(hit.payload)
 
         prompt = Chat.prompt_template.format(
             context=str(matches),

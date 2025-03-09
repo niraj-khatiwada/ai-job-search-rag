@@ -1,10 +1,9 @@
 import {
   Divider as NextUIDivider,
   type DividerProps as NextUIDividerProps,
-} from '@heroui/divider'
+  cn,
+} from '@heroui/react'
 import React from 'react'
-
-import { cn } from '~/utils/tailwind'
 
 interface DividerProps extends NextUIDividerProps {}
 

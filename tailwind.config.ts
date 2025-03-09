@@ -1,5 +1,5 @@
-import type { Config } from 'tailwindcss'
 import { heroui } from '@heroui/react'
+import type { Config } from 'tailwindcss'
 
 const WIDTHS = Object.freeze({
   xs: '320px',
@@ -44,7 +44,6 @@ const config: Config = {
       },
       colors: {
         primary: '#7f46e2',
-        secondary: '#ff6ae7',
         black1: '#000000',
         gray1: '#c2c2c2',
         white1: '#ffffff',

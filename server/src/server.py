@@ -3,6 +3,11 @@ import json
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from chat import Chat
+from vector_db import VectorDB
+import uuid
+from faker import Faker
+from typings import Job
+
 
 app = FastAPI()
 
@@ -37,3 +42,57 @@ def new_message(payload: MessagePayload):
     chat = Chat()
     res = chat.invoke(payload.message)
     return res
+
+
+class JobPayload(BaseModel):
+    title: str
+    company: str
+    location: str
+    salary: int
+
+
+def seed_job_records(jobs: list[Job]):
+    vector_db = VectorDB()
+    chat = Chat()
+    vectors = []
+    for job in jobs:
+        job_id = job["id"]
+        del job["id"]
+        vector = chat.embedding.embed_query(json.dumps(job))
+        vectors.append(vector)
+        job["id"] = job_id
+
+    vector_db.seed_records(
+        payload=jobs,
+        vectors=vectors,
+    )
+
+
+@app.post("/job")
+def add_new_job(job: JobPayload):
+    job_json = job.model_dump()
+    seed_job_records(
+        jobs=[{"id": str(uuid.uuid4()), **job_json}],
+    )
+    return True
+
+
+faker = Faker()
+
+
+@app.post("/seed-fake-jobs")
+def seed_fake_jobs():
+    fake_jobs = []
+    for _ in range(100):
+        fake_jobs.append(
+            {
+                "id": str(uuid.uuid4()),
+                "title": faker.job(),
+                "company": faker.company(),
+                "location": faker.city(),
+                "salary": faker.random_int(min=50000, max=150000),
+            }
+        )
+    seed_job_records(
+        jobs=fake_jobs,
+    )

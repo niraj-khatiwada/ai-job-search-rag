@@ -1,4 +1,5 @@
 import {
+  cn,
   Modal as NextUIModal,
   ModalBody as NextUIModalBody,
   ModalContent as NextUIModalContent,
@@ -9,14 +10,10 @@ import {
   type ModalFooterProps as NextUIModalFooterProps,
   type ModalHeaderProps as NextUIModalHeaderProps,
   type ModalProps as NextUIModalProps,
-} from '@heroui/modal'
+} from '@heroui/react'
 import React from 'react'
 import { BackdropBlurContent } from '~/ui/BackdropBlur'
-import { getPlatform } from '~/utils/fs'
-import { cn } from '~/utils/tailwind'
 import { bottomToTop, zoomIn } from './modal.animation'
-
-const { isWindows, isMacOS } = getPlatform()
 
 interface ModalProps extends NextUIModalProps {
   motionVariant?: 'zoomIn' | 'bottomToTop'
@@ -50,13 +47,10 @@ export function ModalContent(props: ModalContentProps) {
   return (
     <NextUIModalContent
       {...props}
-      className={cn([
-        isMacOS || isWindows ? 'relative bg-transparent' : '',
-        props?.className,
-      ])}
+      className={cn(['relative bg-transparent', props?.className])}
     >
       {props?.children}
-      {isMacOS || isWindows ? <BackdropBlurContent /> : null}
+      <BackdropBlurContent />
     </NextUIModalContent>
   )
 }

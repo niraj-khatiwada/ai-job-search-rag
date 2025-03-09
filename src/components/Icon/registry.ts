@@ -1,7 +1,9 @@
 import React from 'react'
 
+import Arrow from '~/assets/icons/arrow.svg?react'
 import Cross from '~/assets/icons/cross.svg?react'
 import CurvedArrow from '~/assets/icons/curved-arrow.svg?react'
+import Database from '~/assets/icons/database.svg?react'
 import DragAndDrop from '~/assets/icons/drag-and-drop.svg?react'
 import Error from '~/assets/icons/error.svg?react'
 import FileExplorer from '~/assets/icons/file-explorer.svg?react'
@@ -52,6 +54,8 @@ const registry = asRegistry({
   warning: Warning,
   error: Error,
   redo: Redo,
+  database: Database,
+  arrow: Arrow,
 })
 
 export default registry

@@ -2,7 +2,6 @@ import { Outlet, createRootRoute } from '@tanstack/react-router'
 import { TanStackRouterDevtools } from '@tanstack/router-devtools'
 import * as React from 'react'
 
-import Navbar from '~/components/Navbar'
 import { Toaster } from '~/components/Toast'
 import QueryClientProvider from '~/providers/QueryClientProvider'
 import UIProvider from '../providers/UIProvider'
@@ -18,11 +17,10 @@ function RootComponent() {
     <>
       <QueryClientProvider>
         <UIProvider>
-          <Navbar />
           <Outlet />
         </UIProvider>
+        <Toaster />
       </QueryClientProvider>
-      <Toaster />
       {isDev ? <TanStackRouterDevtools position="bottom-right" /> : null}
     </>
   )

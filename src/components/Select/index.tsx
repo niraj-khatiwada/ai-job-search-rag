@@ -3,25 +3,20 @@ import {
   SelectItem as NextUISelectItem,
   type SelectItemProps as NextUISelectItemProps,
   type SelectProps as NextUISelectProps,
-} from '@heroui/select'
+  cn,
+} from '@heroui/react'
 import React from 'react'
 import { blurCSS } from '~/ui/BackdropBlur'
-import { getPlatform } from '~/utils/fs'
-import { cn } from '~/utils/tailwind'
-
-const { isWindows, isMacOS } = getPlatform()
 
 interface SelectProps extends NextUISelectProps {}
+
 function Select(props: SelectProps) {
   return (
     <NextUISelect
       radius="lg"
       {...props}
       classNames={{
-        popoverContent: cn([
-          isWindows || isMacOS ? blurCSS : '',
-          props?.classNames?.popoverContent ?? '',
-        ]),
+        popoverContent: cn([blurCSS, props?.classNames?.popoverContent ?? '']),
         ...(props?.classNames ?? {}),
       }}
     />

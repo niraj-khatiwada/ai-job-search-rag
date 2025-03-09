@@ -1,6 +1,5 @@
+import { cn } from '@heroui/react'
 import { useId } from 'react'
-
-import { cn } from '~/utils/tailwind'
 
 interface DotPatternProps {
   width?: any

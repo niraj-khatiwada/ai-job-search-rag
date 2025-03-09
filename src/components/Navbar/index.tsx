@@ -3,16 +3,21 @@ import {
   NavbarBrand,
   NavbarContent,
   NavbarItem,
-} from '@heroui/navbar'
+} from '@heroui/react'
 import ThemeSwitcher from '~/ui/ThemeSwitcher'
 
-function Navbar() {
+type NavbarProps = {
+  endContent?: React.ReactNode
+}
+
+function Navbar({ endContent }: NavbarProps) {
   return (
     <HeroNavbar maxWidth="2xl">
       <NavbarBrand>
         <p className="font-bold text-inherit">AI Job Search</p>
       </NavbarBrand>
       <NavbarContent justify="end">
+        {endContent}
         <NavbarItem>
           <ThemeSwitcher />
         </NavbarItem>

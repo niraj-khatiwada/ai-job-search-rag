@@ -6,7 +6,7 @@ import React from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { fetcher } from '~/utils/fetcher'
 import Conversation from './conversation'
-import PromptInputWithBottomActions from './prompt-input-with-bottom-actions'
+import PromptInput from './prompt-input'
 
 export default function Chat({
   className,
@@ -41,7 +41,7 @@ export default function Chat({
         />
       </ScrollShadow>
       <div className="flex flex-col gap-2 fixed bottom-0 left-0 right-0">
-        <PromptInputWithBottomActions />
+        <PromptInput />
       </div>
     </div>
   )
