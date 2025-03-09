@@ -40,7 +40,7 @@ export default function Chat({
           }
         />
       </ScrollShadow>
-      <div className="flex flex-col gap-2 fixed bottom-0 left-0 right-0">
+      <div className="flex flex-col gap-2 fixed bottom-[1rem] left-0 right-0">
         <PromptInput />
       </div>
     </div>

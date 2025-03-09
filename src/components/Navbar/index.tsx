@@ -17,8 +17,8 @@ function Navbar({ endContent }: NavbarProps) {
         <p className="font-bold text-inherit">AI Job Search</p>
       </NavbarBrand>
       <NavbarContent justify="end">
-        {endContent}
-        <NavbarItem>
+        <NavbarItem className="flex items-center gap-2">
+          {endContent}
           <ThemeSwitcher />
         </NavbarItem>
       </NavbarContent>

@@ -1,6 +1,7 @@
 import React from 'react'
 
 import Arrow from '~/assets/icons/arrow.svg?react'
+import Bin from '~/assets/icons/bin.svg?react'
 import Cross from '~/assets/icons/cross.svg?react'
 import CurvedArrow from '~/assets/icons/curved-arrow.svg?react'
 import Database from '~/assets/icons/database.svg?react'
@@ -56,6 +57,7 @@ const registry = asRegistry({
   redo: Redo,
   database: Database,
   arrow: Arrow,
+  bin: Bin,
 })
 
 export default registry

@@ -2,6 +2,7 @@ import { useMutation } from '@tanstack/react-query'
 import React from 'react'
 import { toast } from 'sonner'
 
+import { Divider } from '@heroui/react'
 import Button from '~/components/Button'
 import Drawer from '~/components/Drawer'
 import Form from '~/components/Form'
@@ -10,6 +11,7 @@ import NumberInput from '~/components/NumberInput'
 import TextInput from '~/components/TextInput'
 import Tooltip from '~/components/Tooltip'
 import { fetcher } from '~/utils/fetcher'
+import DeleteAllJobs from './delete-all-jobs'
 import SeedFakeJobs from './seed-fake-jobs'
 
 type Job = {
@@ -47,7 +49,7 @@ function SeedData() {
     <Drawer
       renderTriggerer={({ open }) => (
         <Button isIconOnly size="sm" onPress={open}>
-          <Tooltip content="Seed jobs" aria-label="Seed jobs" placement="right">
+          <Tooltip content="Seed jobs" aria-label="Seed jobs">
             <Icon name="database" size={24} />
           </Tooltip>
         </Button>
@@ -74,9 +76,13 @@ function SeedData() {
             Submit
           </Button>
         </Form>
-        <p className="text-center my-2">Or</p>
-        <div className="mt-10">
+        <Divider />
+        <div className="my-10">
           <SeedFakeJobs />
+        </div>
+        <Divider />
+        <div className="my-10">
+          <DeleteAllJobs />
         </div>
       </div>
     </Drawer>

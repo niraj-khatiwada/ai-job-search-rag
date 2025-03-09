@@ -7,6 +7,7 @@ from vector_db import VectorDB
 import uuid
 from faker import Faker
 from typings import Job
+import os
 
 
 app = FastAPI()
@@ -68,12 +69,20 @@ def seed_job_records(jobs: list[Job]):
     )
 
 
-@app.post("/job")
+@app.post("/jobs")
 def add_new_job(job: JobPayload):
     job_json = job.model_dump()
     seed_job_records(
         jobs=[{"id": str(uuid.uuid4()), **job_json}],
     )
+    return True
+
+
+@app.delete("/jobs")
+def delete_jobs():
+    vector_db = VectorDB()
+    if vector_db.client.collection_exists(VectorDB.JOB_COLLECTION_NAME):
+        vector_db.client.delete_collection(VectorDB.JOB_COLLECTION_NAME)
     return True
 
 
@@ -96,3 +105,11 @@ def seed_fake_jobs():
     seed_job_records(
         jobs=fake_jobs,
     )
+
+
+@app.delete("/chat-history")
+def delete_history():
+    file_path = Chat.get_chat_history_path()
+    if os.path.exists(file_path):
+        os.remove(file_path)
+    return True
