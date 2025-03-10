@@ -6,7 +6,9 @@ import {
 interface NumberInputProps extends NextUINumberInputProps {}
 
 function NumberInput({ ...props }: NumberInputProps) {
-  return <NextUINumberInput size="sm" {...(props ?? {})} />
+  return (
+    <NextUINumberInput labelPlacement="outside" size="sm" {...(props ?? {})} />
+  )
 }
 
 export default NumberInput

@@ -8,7 +8,11 @@ interface TextareaProps extends NextUITextareaProps {
 }
 
 function Textarea({ children, ...props }: TextareaProps) {
-  return <NextUITextarea {...(props ?? {})}>{children}</NextUITextarea>
+  return (
+    <NextUITextarea labelPlacement="outside" {...(props ?? {})}>
+      {children}
+    </NextUITextarea>
+  )
 }
 
 export default Textarea

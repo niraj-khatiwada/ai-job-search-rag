@@ -55,34 +55,36 @@ function SeedData() {
         </Button>
       )}
     >
-      <p className="text-2xl text-center mt-4">Add new job(s)</p>
-      <div className="w-full h-[80vh] max-w-[35rem] mx-auto">
-        <Form
-          className="w-full justify-center items-center space-y-4"
-          onSubmit={onSubmit}
-        >
-          <TextInput isRequired name="title" label="Job Title" />
-          <TextInput isRequired name="company" label="Company" />
-          <TextInput isRequired name="location" label="Location" />
-          <NumberInput isRequired name="salary" label="Salary" />
-          <Button
-            color="primary"
-            fullWidth
-            type="submit"
-            variant="solid"
-            isLoading={addNewJob.isPending}
-            disabled={addNewJob.isPending}
+      <div className="px-4">
+        <p className="text-2xl text-center mt-4">Add new job(s)</p>
+        <div className="w-full h-[80vh] max-w-[35rem] mx-auto">
+          <Form
+            className="w-full justify-center items-center space-y-4 px-4"
+            onSubmit={onSubmit}
           >
-            Submit
-          </Button>
-        </Form>
-        <Divider />
-        <div className="my-10">
-          <SeedFakeJobs />
-        </div>
-        <Divider />
-        <div className="my-10">
-          <DeleteAllJobs />
+            <TextInput isRequired name="title" label="Job Title" />
+            <TextInput isRequired name="company" label="Company" />
+            <TextInput isRequired name="location" label="Location" />
+            <NumberInput isRequired name="salary" label="Salary" />
+            <Button
+              color="primary"
+              fullWidth
+              type="submit"
+              variant="solid"
+              isLoading={addNewJob.isPending}
+              disabled={addNewJob.isPending}
+            >
+              Submit
+            </Button>
+          </Form>
+          <Divider />
+          <div className="my-10">
+            <SeedFakeJobs />
+          </div>
+          <Divider />
+          <div className="my-10">
+            <DeleteAllJobs />
+          </div>
         </div>
       </div>
     </Drawer>
